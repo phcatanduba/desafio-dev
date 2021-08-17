@@ -1,10 +1,15 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Buttons() {
     return (
         <Container>
-            <Button>Importe as informações de uma loja</Button>
-            <Button>Veja as informações de uma loja</Button>
+            <Link to="/import">
+                <Button>Importe as informações de uma loja</Button>
+            </Link>
+            <Link to="/store">
+                <Button>Veja as informações de uma loja</Button>
+            </Link>
         </Container>
     );
 }
