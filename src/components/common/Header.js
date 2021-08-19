@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../assets/images/logo_bycoders.svg';
 
 export default function Header() {
     return (
         <Title>
-            <img src={Logo} alt="logo bycoders" />
+            <Link to="/">
+                <img src={Logo} alt="logo bycoders" />
+            </Link>
         </Title>
     );
 }
