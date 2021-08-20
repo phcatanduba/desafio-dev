@@ -6,9 +6,13 @@ import 'reflect-metadata';
 
 import connectDatabase from './database';
 
+import * as storeController from './controllers/storeController';
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.post('/store-info', storeController.save);
 
 export async function init() {
     await connectDatabase();
