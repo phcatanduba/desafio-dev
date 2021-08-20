@@ -8,11 +8,13 @@ import { useHistory } from 'react-router-dom';
 export default function ImportPage() {
     const [file, setFile] = useState();
     const [text, setText] = useState();
+    const [boolean, setBoolean] = useState(true);
     const history = useHistory();
     let infosByStore = [];
 
     function onChangeFile(file) {
         setFile(file);
+        setBoolean(false);
     }
 
     async function handleFile(e) {
@@ -68,7 +70,9 @@ export default function ImportPage() {
                     />
                 </div>
                 <div>
-                    <button onClick={handleFile}>Enviar</button>
+                    <button onClick={handleFile} disabled={boolean}>
+                        Enviar
+                    </button>
                 </div>
             </form>
         </Container>
