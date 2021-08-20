@@ -1,7 +1,7 @@
 interface Infos {
     ownerName: string;
     storeName: string;
-    type: string;
+    typeId: number;
     value: number;
     cpf: string;
     creditCard: string;

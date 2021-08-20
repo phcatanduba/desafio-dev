@@ -8,7 +8,7 @@ export function save(req: Request, res: Response) {
     try {
         const isValid = storeService.isValid(infos);
         if (isValid) {
-            storeService.save();
+            storeService.save(infos);
             res.sendStatus(200);
         } else {
             res.sendStatus(400);
