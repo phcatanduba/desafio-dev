@@ -22,7 +22,13 @@ export default function ImportPage() {
 
     infosByStore = text?.split('\n');
     if (infosByStore !== undefined) {
-        axios.post('http://localhost:4000/file', infosByStore);
+        const promise = axios.post(
+            'http://localhost:4000/store-info',
+            infosByStore
+        );
+        promise.then(() => {
+            alert('INFORMAÇÕES ENVIADAS!!');
+        });
     }
 
     return (
@@ -34,6 +40,7 @@ export default function ImportPage() {
                         Carregue um arquivo com as informações da loja
                     </label>
                     <input
+                        accept=".txt"
                         name="file"
                         type="file"
                         onChange={(e) => {
@@ -45,7 +52,6 @@ export default function ImportPage() {
                     <button onClick={handleFile}>Enviar</button>
                 </div>
             </form>
-            <div accept></div>
         </Container>
     );
 }

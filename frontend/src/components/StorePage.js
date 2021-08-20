@@ -54,7 +54,7 @@ export default function StorePage() {
                 <ul>
                     {stores.map((store, index) => {
                         return (
-                            <li>
+                            <li key={index}>
                                 <button onClick={() => handleClick(index)}>
                                     {store.name}
                                 </button>
@@ -67,23 +67,25 @@ export default function StorePage() {
                                         <span>Valor</span>
                                         <span>Data</span>
                                     </div>
-                                    {store.transactions.map((transaction) => {
-                                        return (
-                                            <div className="datas">
-                                                <div className="data">
-                                                    {transaction.type}
+                                    {store.transactions.map(
+                                        (transaction, i) => {
+                                            return (
+                                                <div className="datas" key={i}>
+                                                    <div className="data">
+                                                        {transaction.type}
+                                                    </div>
+                                                    <div className="line"></div>
+                                                    <div className="data">
+                                                        {transaction.value}
+                                                    </div>
+                                                    <div className="line"></div>
+                                                    <div className="data">
+                                                        {transaction.data}
+                                                    </div>
                                                 </div>
-                                                <div className="line"></div>
-                                                <div className="data">
-                                                    {transaction.value}
-                                                </div>
-                                                <div className="line"></div>
-                                                <div className="data">
-                                                    {transaction.data}
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
+                                            );
+                                        }
+                                    )}
                                 </div>
                             </li>
                         );
