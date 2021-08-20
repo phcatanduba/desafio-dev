@@ -13,15 +13,12 @@ export default class Transaction {
     storeName: string;
 
     @Column()
-    cellphone: string;
-
-    @Column()
     typeId: number;
 
     @ManyToOne(() => Type, (type) => type.name)
     type: Type;
 
-    @Column()
+    @Column('float')
     value: number;
 
     @Column()

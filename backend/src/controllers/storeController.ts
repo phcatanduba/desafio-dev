@@ -5,6 +5,7 @@ import * as storeService from '../services/storeService';
 
 export async function save(req: Request, res: Response) {
     const infos = req.body as Infos;
+
     try {
         const isValid = storeService.isValid(infos);
         if (isValid) {

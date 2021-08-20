@@ -7,7 +7,7 @@ export function isValid(infos: Infos) {
     const infosSchema = joi.object({
         ownerName: joi.string().required(),
         storeName: joi.string().required(),
-        type: joi.number().required(),
+        typeId: joi.number().required(),
         value: joi.number().required(),
         cpf: joi.string().required(),
         creditCard: joi.string().required(),
