@@ -21,6 +21,14 @@ export function isValid(infos: Infos) {
         return false;
     }
 }
+
 export async function save(infos: Infos) {
     await getRepository(Transaction).insert(infos);
+}
+
+export async function get() {
+    const result = await getRepository(Transaction).find({
+        select: ['ownerName', 'type', 'storeName', 'value'],
+    });
+    return result;
 }

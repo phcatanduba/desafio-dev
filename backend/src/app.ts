@@ -14,6 +14,8 @@ app.use(express.json());
 
 app.post('/store-info', storeController.save);
 
+app.get('/store-info', storeController.get);
+
 export async function init() {
     await connectDatabase();
 }
