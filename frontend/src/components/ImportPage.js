@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 import Header from './common/Header';
+import { useHistory } from 'react-router-dom';
 
 export default function ImportPage() {
     const [file, setFile] = useState();
     const [text, setText] = useState();
+    const history = useHistory();
     let infosByStore = [];
 
     function onChangeFile(file) {
@@ -22,12 +24,29 @@ export default function ImportPage() {
 
     infosByStore = text?.split('\n');
     if (infosByStore !== undefined) {
-        const promise = axios.post(
-            'http://localhost:4000/store-info',
-            infosByStore
-        );
-        promise.then(() => {
-            alert('INFORMAÇÕES ENVIADAS!!');
+        infosByStore.forEach((info, index) => {
+            const body = {
+                ownerName: info.substring(48, 62),
+                storeName: info.substring(62, 81),
+                typeId: +info.substring(0, 1),
+                value: +info.substring(9, 19) / 100,
+                cpf: info.substring(19, 30),
+                creditCard: info.substring(30, 42),
+                date: info.substring(1, 9),
+                hour: info.substring(42, 48),
+            };
+            const promise = axios.post(
+                'http://localhost:4000/store-info',
+                body
+            );
+            if (index === infosByStore.length - 2) {
+                promise.then(() => {
+                    history.push('/');
+                });
+                promise.catch(() => {
+                    alert('ERRO!');
+                });
+            }
         });
     }
 
