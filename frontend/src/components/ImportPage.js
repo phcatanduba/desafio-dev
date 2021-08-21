@@ -99,4 +99,16 @@ const Container = styled.main`
             word-break: break-all;
         }
     }
+
+    input {
+        margin-top: 20px;
+        word-break: break-all;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 120px;
+        height: 40px;
+        border-radius: 20px;
+    }
 `;
