@@ -20,7 +20,7 @@ export async function save(req: Request, res: Response) {
     }
 }
 
-export async function get(res: Response) {
+export async function get(req: Request, res: Response) {
     try {
         const result = await storeService.get();
         res.send(result);

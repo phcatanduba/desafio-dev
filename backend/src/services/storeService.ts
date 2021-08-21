@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import joi from 'joi';
+import joi, { object } from 'joi';
 import Infos from '../interfaces/InfosInterface';
 import Transaction from '../entities/transaction';
 
@@ -28,7 +28,40 @@ export async function save(infos: Infos) {
 
 export async function get() {
     const result = await getRepository(Transaction).find({
-        select: ['ownerName', 'type', 'storeName', 'value'],
+        relations: ['type'],
+        select: ['storeName', 'type', 'value', 'date'],
     });
-    return result;
+
+    const transactions: any[] = [];
+    result.forEach((transaction) => {
+        let hasStore = -1;
+        transactions.forEach((t, index) => {
+            if (t.storeName === transaction.storeName) {
+                hasStore = index;
+            }
+        });
+
+        if (hasStore === -1) {
+            const newTransaction = {
+                storeName: transaction.storeName,
+                transactions: [
+                    {
+                        type: transaction.type.type,
+                        name: transaction.type.name,
+                        value: transaction.value,
+                        date: transaction.date,
+                    },
+                ],
+            };
+            transactions.push(newTransaction);
+        } else {
+            transactions[hasStore].transactions.push({
+                type: transaction.type.type,
+                name: transaction.type.name,
+                value: transaction.value,
+                date: transaction.date,
+            });
+        }
+    });
+    return transactions;
 }
