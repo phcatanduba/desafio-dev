@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import Header from './common/Header';
 
@@ -7,32 +8,10 @@ export default function StorePage() {
     const [wasClicked, setWasClicked] = useState([]);
     const [stores, setStores] = useState([]);
     useEffect(() => {
-        setStores([
-            {
-                name: 'Padaria dos Catandubas',
-                transactions: [
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                ],
-            },
-            {
-                name: 'Padaria dos Catandubas',
-                transactions: [
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                    { type: 'teste', value: '123456', data: '18/07/2000' },
-                ],
-            },
-        ]);
+        const promise = axios.get('http://localhost:4000/store-info');
+        promise.then((res) => {
+            setStores(res.data);
+        });
     }, []);
 
     function handleClick(index) {
@@ -45,18 +24,19 @@ export default function StorePage() {
             setWasClicked(newWasClicked);
         }
     }
-
+    let sum;
     return (
-        <Container teste={'teste'}>
+        <Container>
             <Header />
             <div className="stores">
                 <p>Seleciona um loja: </p>
                 <ul>
-                    {stores.map((store, index) => {
+                    {stores?.map((store, index) => {
+                        sum = 0;
                         return (
                             <li key={index}>
                                 <button onClick={() => handleClick(index)}>
-                                    {store.name}
+                                    {store.storeName}
                                 </button>
                                 <div
                                     className="infos"
@@ -67,25 +47,33 @@ export default function StorePage() {
                                         <span>Valor</span>
                                         <span>Data</span>
                                     </div>
-                                    {store.transactions.map(
+                                    {store?.transactions.map(
                                         (transaction, i) => {
+                                            sum += transaction.value;
                                             return (
                                                 <div className="datas" key={i}>
-                                                    <div className="data">
-                                                        {transaction.type}
-                                                    </div>
+                                                    <Data
+                                                        type={transaction.type}
+                                                    >
+                                                        {transaction.name}
+                                                    </Data>
                                                     <div className="line"></div>
-                                                    <div className="data">
+                                                    <Data
+                                                        type={transaction.type}
+                                                    >
                                                         {transaction.value}
-                                                    </div>
+                                                    </Data>
                                                     <div className="line"></div>
-                                                    <div className="data">
-                                                        {transaction.data}
-                                                    </div>
+                                                    <Data
+                                                        type={transaction.type}
+                                                    >
+                                                        {transaction.date}
+                                                    </Data>
                                                 </div>
                                             );
                                         }
                                     )}
+                                    <Value>Valor total: {sum.toFixed(2)}</Value>
                                 </div>
                             </li>
                         );
@@ -95,6 +83,25 @@ export default function StorePage() {
         </Container>
     );
 }
+
+const Value = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin-top: 5px;
+`;
+
+const Data = styled.div`
+    font-size: 16px;
+    margin-bottom: 7px;
+    color: ${(props) => (props.type === 'debit' ? 'red' : 'green')};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+`;
 
 const Container = styled.main`
     width: 100%;
@@ -106,12 +113,6 @@ const Container = styled.main`
         display: flex;
         width: 100%;
         justify-content: space-evenly;
-    }
-
-    .data {
-        font-size: 20px;
-        margin-bottom: 7px;
-        color: ${(props) => (props.teste ? 'red' : 'green')};
     }
 
     .title {
@@ -157,7 +158,7 @@ const Container = styled.main`
 
     .infos {
         width: 320px;
-        height: 320px;
+        min-height: 320px;
         background-color: white;
         border-radius: 20px;
     }
