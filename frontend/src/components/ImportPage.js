@@ -38,7 +38,7 @@ export default function ImportPage() {
                 hour: info.substring(42, 48),
             };
             const promise = axios.post(
-                'http://localhost:4000/store-info',
+                `${process.env.REACT_APP_API_BASE_URL}/store-info`,
                 body
             );
             if (index === infosByStore.length - 2) {

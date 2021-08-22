@@ -8,7 +8,9 @@ export default function StorePage() {
     const [wasClicked, setWasClicked] = useState([]);
     const [stores, setStores] = useState([]);
     useEffect(() => {
-        const promise = axios.get('http://localhost:4000/store-info');
+        const promise = axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/store-info`
+        );
         promise.then((res) => {
             setStores(res.data);
         });
