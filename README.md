@@ -1,7 +1,8 @@
 ## About
 
 The purpose of this SPA is to persist the data that the user uploads in a txt file to show the data of each store that uses the system.
-The user will have two options to upload or view the store data.
+The user will have two options to upload or view the store data.<br>
+You can try it here: http://desafio-dev.vercel.app/
 
 ## How to run
 1. Clone this repository
