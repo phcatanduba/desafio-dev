@@ -15,6 +15,33 @@ export class TypesAndTransactionsTableCreated1629464537287
         await queryRunner.query(
             `ALTER TABLE "transactions" ADD CONSTRAINT "FK_a72306bb02be8e96b3bd110f9aa" FOREIGN KEY ("typeId") REFERENCES "types"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
         );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('débito', 'credit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('boleto', 'debit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('financiamento', 'debit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('crédito', 'credit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('recebimento empréstimo', 'credit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('vendas', 'credit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('recebimento ted', 'credit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('recebimento doc', 'credit')`
+        );
+        await queryRunner.query(
+            `INSERT INTO "types" (name, type) VALUES ('aluguel', 'debit')`
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
