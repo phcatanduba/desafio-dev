@@ -15,11 +15,17 @@ psql postgres
 ```bash
 CREATE DATABASE [database_name];
 ```
-- 2.3 Insert your database info at ``.env file`` as the following example
+
+- 2.3 Go to the back-end folder
+```bash
+cd ./backend
+```
+
+- 2.4 Insert your database info at ``.env file`` as the following example
 ```bash
 DATABASE_URL='postgres://postgres:PASSWORD@localhost:5432/DATABASE_NAME'
 ```
-- 2.4 Finally, you can run migrations to create the tables
+- 2.5 Finally, you can run migrations to create the tables
 ```bash
 npm run build
 npm run typeorm migration: run
@@ -31,7 +37,6 @@ npm i
 ```
 4. Run the back-end with
 ```bash
-cd ./backend
 npm run dev
 ```
 5. Go to the front-end folder
