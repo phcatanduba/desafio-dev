@@ -11,14 +11,14 @@ You can try it here: http://desafio-dev.vercel.app/
 ```
 [
  {
-    "ownerName": string;
-    "storeName": string;
-    "typeId": number;    (min: 0, max: 8) 
-    "value": number;
-    "cpf": string;
-    "creditCard": string;
-    "date": string;
-    "hour": string;
+    "ownerName": string,
+    "storeName": string,
+    "typeId": number,    (min: 0, max: 8) 
+    "value": number,
+    "cpf": string,
+    "creditCard": string,
+    "date": string,
+    "hour": string
  }
 ]
 ```
