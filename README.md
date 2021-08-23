@@ -4,6 +4,25 @@ The purpose of this SPA is to persist the data that the user uploads in a txt fi
 The user will have two options to upload or view the store data.<br>
 You can try it here: http://desafio-dev.vercel.app/
 
+## How to use 
+1. GET to the /store-info to get all stores info
+2. POST to the /store-info to save CNAB.txt informations
+3. JSON body example:
+```
+[
+ {
+    "ownerName": string;
+    "storeName": string;
+    "typeId": number;    (min: 0, max: 8) 
+    "value": number;
+    "cpf": string;
+    "creditCard": string;
+    "date": string;
+    "hour": string;
+ }
+]
+```
+
 ## How to run
 1. Clone this repository
 2. Create a database using ``migrations`` 
